@@ -1,0 +1,32 @@
+import random
+import math
+from functools import reduce
+
+
+def lcm(a, b):
+    return abs(a * b) // math.gcd(a, b)
+
+def lcm_multiple(numbers):
+    return reduce(lcm, numbers, 1) # accumulate
+
+def simulate_rolls_until_lcm():
+    rolls = []
+    lcm_value = 1
+    count = 0
+
+    while lcm_value <= 2000:
+        roll = random.randint(1, 10) # random walk
+        rolls.append(roll)
+        lcm_value = lcm_multiple(rolls)
+        count += 1
+    
+    return count
+
+def estimate_expected_rolls(num_simulations):
+    total_rolls = sum(simulate_rolls_until_lcm() for _ in range(num_simulations))
+    return total_rolls / num_simulations
+
+num_simulations = 10000
+
+expected_rolls = estimate_expected_rolls(num_simulations)
+print(f"Expected number of rolls until LCM exceeds 2000: {expected_rolls}")
