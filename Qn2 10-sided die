@@ -10,8 +10,12 @@ def lcm_multiple(numbers):
     return reduce(lcm, numbers, 1) # accumulate
 
 def simulate_rolls_until_lcm():
+    """
+    Each new number might increase the LCM if it 
+    has prime factors that haven't been included enough times yet.
+    """
     rolls = []
-    lcm_value = 1
+    lcm_value = 1 
     count = 0
 
     while lcm_value <= 2000:
@@ -29,7 +33,7 @@ def estimate_expected_rolls(num_simulations):
 num_simulations = 10000
 
 def main():
-    for _ in range(1, 30):
+    for _ in range(1, 31): # CLT
         expected_rolls = estimate_expected_rolls(num_simulations)
         print(f"Expected number of rolls until LCM exceeds 2000: {expected_rolls}")
 
